@@ -135,7 +135,7 @@ OPENAI_API_KEY=your_api_key_here
 
 | 验证类型 | 结果 | 检查内容 |
 |---|---:|---|
-| 离线测试 | 31 / 31 | 数据计算、RAG、工作流、页面冒烟测试 |
+| 离线测试 | 34 / 34 | 数据计算、API 错误分类、RAG、工作流、页面冒烟测试 |
 | Agent Evals | 8 / 8 | 状态、工具选择、关键数字、RAG 引用、混合调用 |
 
 ## 辅助脚本
@@ -152,6 +152,9 @@ OPENAI_API_KEY=your_api_key_here
 
 # 运行双 Agent 报告工作流
 .\.venv\Scripts\python.exe scripts\report_demo.py
+
+# 发送一次极小请求，检查 API 认证、额度和模型权限
+.\.venv\Scripts\python.exe scripts\check_openai_access.py
 ```
 
 ## 项目结构

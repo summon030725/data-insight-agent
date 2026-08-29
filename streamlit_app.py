@@ -16,6 +16,7 @@ from data_agent import (
     MAX_QUESTION_LENGTH,
     analysis_report_to_markdown,
     build_analysis_report,
+    describe_openai_error,
     find_risk_orders,
     generate_business_insights,
     load_sales,
@@ -420,7 +421,10 @@ def render_agent_question(sales: pd.DataFrame) -> None:
         if not question.strip():
             st.warning("请先输入一个问题。")
         elif not os.getenv("OPENAI_API_KEY"):
-            st.error("没有找到 API Key，请检查项目根目录的 .env 文件。")
+            st.error(
+                "没有找到 API Key。云端请检查 Streamlit Secrets，"
+                "本地请检查项目根目录的 .env 文件。"
+            )
         else:
             with st.spinner("Agent 正在选择工具并分析当前筛选范围……"):
                 try:
@@ -437,8 +441,8 @@ def render_agent_question(sales: pd.DataFrame) -> None:
                     st.error("Agent 调用工具的轮次过多，请简化问题后重试。")
                 except ModelBehaviorError:
                     st.error("Agent 返回格式异常，请重新提问。")
-                except OpenAIError:
-                    st.error("API 请求失败，请稍后重试或检查账户额度。")
+                except OpenAIError as error:
+                    st.error(describe_openai_error(error, "Agent 请求失败"))
                 except AgentsException:
                     st.error("Agent 运行失败，请清空对话后重试。")
                 else:
@@ -505,15 +509,18 @@ def render_knowledge_base() -> None:
         if not query.strip():
             st.warning("请先输入要检索的问题。")
         elif not os.getenv("OPENAI_API_KEY"):
-            st.error("没有找到 API Key，请检查项目根目录的 .env 文件。")
+            st.error(
+                "没有找到 API Key。云端请检查 Streamlit Secrets，"
+                "本地请检查项目根目录的 .env 文件。"
+            )
         else:
             with st.spinner("正在生成问题向量并检索最相关知识块……"):
                 try:
                     st.session_state["knowledge_hits"] = retrieve_business_knowledge(
                         query, top_k=4
                     )
-                except OpenAIError:
-                    st.error("Embedding API 请求失败，请稍后重试。")
+                except OpenAIError as error:
+                    st.error(describe_openai_error(error, "Embedding 请求失败"))
                 except (FileNotFoundError, ValueError) as error:
                     st.error(str(error))
 
@@ -555,7 +562,10 @@ def render_report_workflow(sales: pd.DataFrame) -> None:
         if not request.strip():
             st.warning("请先填写报告目标。")
         elif not os.getenv("OPENAI_API_KEY"):
-            st.error("没有找到 API Key，请检查项目根目录的 .env 文件。")
+            st.error(
+                "没有找到 API Key。云端请检查 Streamlit Secrets，"
+                "本地请检查项目根目录的 .env 文件。"
+            )
         else:
             with st.spinner("规划 Agent 正在选择分析路线并生成报告……"):
                 try:
@@ -568,8 +578,8 @@ def render_report_workflow(sales: pd.DataFrame) -> None:
                     st.error("报告工作流轮次过多，请缩小报告目标后重试。")
                 except ModelBehaviorError:
                     st.error("Agent 返回的计划或报告格式异常，请重新生成。")
-                except OpenAIError:
-                    st.error("API 请求失败，请稍后重试或检查账户额度。")
+                except OpenAIError as error:
+                    st.error(describe_openai_error(error, "报告请求失败"))
                 except AgentsException:
                     st.error("报告工作流运行失败，请稍后重试。")
                 else:

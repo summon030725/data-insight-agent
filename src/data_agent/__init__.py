@@ -1,6 +1,7 @@
 """Core package for the data analysis agent learning project."""
 
 from .analysis import load_sales, profit_by_month, profit_by_product, summarize_sales
+from .api_errors import describe_openai_error
 from .agent import (
     DEFAULT_MODEL,
     MAX_QUESTION_LENGTH,
@@ -62,6 +63,7 @@ __all__ = [
     "build_knowledge_index",
     "create_data_agent",
     "collect_analysis_evidence",
+    "describe_openai_error",
     "find_risk_orders",
     "generate_business_insights",
     "load_sales",

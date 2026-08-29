@@ -74,6 +74,19 @@ Streamlit 会把根级 Secret 同时作为环境变量提供，因此 OpenAI SDK
 
 在 Streamlit Cloud 的 App settings → Secrets 中添加根级 `OPENAI_API_KEY`，然后重启应用。
 
+### API 返回 401、403 或 429
+
+- `401`：Key 无效、已撤销，或粘贴的不是当前 Project 的 Key。
+- `403`：Key 没有模型权限，或部署地区不受支持。
+- `429 credit_balance_exhausted`：Key 所属组织没有可用预付额度。
+- `429 project_spend_limit_exceeded`：Key 所属 Project 的消费上限已达到。
+
+本地可以用一次极小请求检查认证、额度和模型权限；脚本不会打印 Key：
+
+```powershell
+.\.venv\Scripts\python.exe scripts\check_openai_access.py
+```
+
 ### 找不到知识库索引
 
 确认 `data/knowledge_index.json` 已提交。知识文档更新后，在本地重新运行：
