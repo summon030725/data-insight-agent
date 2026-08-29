@@ -1,5 +1,7 @@
 # 智能销售数据分析 Agent
 
+[中文](README.md) | [English](README_EN.md)
+
 一个面向真实业务分析场景的 Agent 工程项目：大语言模型负责理解目标与选择工具，Python 负责可靠计算，RAG 提供业务知识依据，多阶段工作流生成结构化深度报告。
 
 **在线演示：** [打开 Streamlit 应用](https://data-insight-agent-cnug7q9cwxp93rjgis9pgm.streamlit.app/)
@@ -174,7 +176,7 @@ agent/
 │   ├── rag.py                # Chunk、Embedding、向量检索
 │   ├── report_workflow.py    # 规划 Agent 与报告 Agent 工作流
 │   └── evaluation.py         # Agent 行为评分器
-├── tests/                    # 31 项离线测试
+├── tests/                    # 34 项离线测试
 ├── streamlit_app.py          # 交互式分析工作台
 └── pyproject.toml            # 项目与依赖配置
 ```
