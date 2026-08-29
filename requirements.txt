@@ -1,0 +1,2 @@
+# Install this project and its pinned dependency ranges from pyproject.toml.
+-e .

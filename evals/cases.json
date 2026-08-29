@@ -1,0 +1,58 @@
+[
+  {
+    "id": "top_product",
+    "question": "哪个产品利润最高？",
+    "expected_status": "answered",
+    "expected_tools": ["get_profit_by_product"],
+    "required_answer_terms": ["Keyboard", "1843"]
+  },
+  {
+    "id": "top_month",
+    "question": "哪个月份利润最高？",
+    "expected_status": "answered",
+    "expected_tools": ["get_profit_by_month"],
+    "required_answer_terms": ["2026", "4", "1657"]
+  },
+  {
+    "id": "sales_summary",
+    "question": "一共有多少订单？总利润是多少？",
+    "expected_status": "answered",
+    "expected_tools": ["get_sales_summary"],
+    "required_answer_terms": ["12", "5168"]
+  },
+  {
+    "id": "forecast_unsupported",
+    "question": "请预测下个月利润。",
+    "expected_status": "unsupported",
+    "expected_tools": [],
+    "required_answer_terms": []
+  },
+  {
+    "id": "region_performance",
+    "question": "哪个地区利润最高？",
+    "expected_status": "answered",
+    "expected_tools": ["get_performance_by_region"],
+    "required_answer_terms": ["West", "1844"]
+  },
+  {
+    "id": "refund_risk",
+    "question": "哪些订单存在退款或亏损风险？先告诉我最需要关注的一笔。",
+    "expected_status": "answered",
+    "expected_tools": ["get_refund_risks"],
+    "required_answer_terms": ["1009", "1299"]
+  },
+  {
+    "id": "refund_policy_rag",
+    "question": "退款金额超过1000元和3000元分别需要谁复核？请引用知识库来源。",
+    "expected_status": "answered",
+    "expected_tools": ["search_business_knowledge"],
+    "required_answer_terms": ["区域售后主管", "财务", "refund_policy.md"]
+  },
+  {
+    "id": "hybrid_region_policy",
+    "question": "East地区退款率是多少，达到区域手册的重点复核阈值了吗？请引用来源。",
+    "expected_status": "answered",
+    "expected_tools": ["get_performance_by_region", "search_business_knowledge"],
+    "required_answer_terms": ["24.5", "8%", "regional_playbook.md"]
+  }
+]
