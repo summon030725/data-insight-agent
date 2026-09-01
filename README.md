@@ -181,11 +181,6 @@ agent/
 └── pyproject.toml            # 项目与依赖配置
 ```
 
-## 面试与部署
-
-- [面试讲解稿](docs/INTERVIEW_GUIDE.md)
-- [Streamlit Cloud 部署说明](DEPLOYMENT.md)
-
 ## 当前限制与下一步
 
 - 知识库规模较小，目前使用本地 JSON 向量索引；更大规模可迁移至 pgvector、Milvus 或托管向量数据库。
