@@ -182,10 +182,6 @@ agent/
 └── pyproject.toml            # Package and dependency configuration
 ```
 
-## Interview and Deployment Notes
-
-- [Interview walkthrough](docs/INTERVIEW_GUIDE.md) — Chinese
-- [Streamlit Cloud deployment guide](DEPLOYMENT.md) — Chinese
 
 ## Current Limitations and Next Steps
 
